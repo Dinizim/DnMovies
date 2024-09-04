@@ -1,10 +1,32 @@
 ﻿@model MovieResponse
 
-<h1>Lista de Filmes</h1>
+<h1>Filmes - Populares</h1>
 
-<ul>
-@foreach (var movie in Model.Results)
-    {
-        <li>@movie.Title</li>
-    }
-</ul>
+<div id="movieCarousel" class="carousel slide bg-dark custom-shadow"  data-bs-ride="carousel" >
+    <div class="carousel-inner style=">
+        @{
+            var isFirst = true;
+        }
+        @foreach (var movie in Model.Results)
+        {
+            <div class="carousel-item m-1 @(isFirst ? "active" : "")">
+                <div class="d-flex justify-content-center">
+                    <div class="card custom-card" style="width: 12rem; border border-none">
+                        <img class="card-img-top" src="@movie.Poster_path" alt="@movie.Title">                       
+                    </div>
+                </div>
+            </div>
+    
+                isFirst = false;
+            
+        }
+    </div>
+    <a class="carousel-control-prev" href="#movieCarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#movieCarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </a>
+</div>
