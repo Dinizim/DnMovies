@@ -1,32 +1,48 @@
 ﻿@model MovieResponse
 
-<h1>Filmes - Populares</h1>
+<div class="container mt-5">
+    <h1 class="text-center text-primary mb-4">Filmes - Populares</h1>
 
-<div id="movieCarousel" class="carousel slide bg-dark custom-shadow"  data-bs-ride="carousel" >
-    <div class="carousel-inner style=">
-        @{
-            var isFirst = true;
-        }
-        @foreach (var movie in Model.Results)
-        {
-            <div class="carousel-item m-1 @(isFirst ? "active" : "")">
-                <div class="d-flex justify-content-center">
-                    <div class="card custom-card" style="width: 12rem; border border-none">
-                        <img class="card-img-top" src="@movie.Poster_path" alt="@movie.Title">                       
+    <!-- Carousel -->
+    <div id="movieCarousel" class="carousel slide bg-dark custom-shadow rounded" style="height: 400px;" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            @{
+                var isFirst = true;
+            }
+            @foreach (var movie in Model.Results)
+            {
+                <div class="carousel-item @(isFirst ? "active" : "")">
+                    <div class="d-flex justify-content-center align-items-center" style="height: 100%;">
+                        <div class="card custom-card border-0 shadow-lg"  style= "margin-top: 20px;">
+                            <img class="card-img-top rounded" style="height: 350px; object-fit: cover;" src="@movie.Poster_path" alt="@movie.Title">
+                        </div>
                     </div>
                 </div>
-            </div>
-    
                 isFirst = false;
-            
+            }
+        </div>
+
+        <a class="carousel-control-prev" href="#movieCarousel" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#movieCarousel" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Próximo</span>
+        </a>
+    </div>
+
+
+    <!-- Lista de Filmes -->
+    <h2 class="text-center text-success mt-5 mb-4">Outros Filmes Populares</h2>
+    <div class="movie-list row g-3">
+        @foreach (var movie in Model.Results)
+        {
+            <div class="col-6 col-md-3">
+                <div class="card custom-card border-0 shadow-sm">
+                    <img class="card-img-top rounded" style="height: 300px; object-fit: cover;" src="@movie.Poster_path" alt="@movie.Title">
+                </div>
+            </div>
         }
     </div>
-    <a class="carousel-control-prev" href="#movieCarousel" role="button" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#movieCarousel" role="button" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </a>
 </div>

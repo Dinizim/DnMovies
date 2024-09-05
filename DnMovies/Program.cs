@@ -13,11 +13,6 @@ builder.Services.AddRefitClient<IMovieRepository>()
         c.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokenApi}");
         c.DefaultRequestHeaders.Add("Accept", "application/json");
     });
-builder.Services.AddRefitClient<IMovieImgRepository>()
-    .ConfigureHttpClient(c =>
-    {
-        c.BaseAddress = new Uri(builder.Configuration["TMDB:BaseImageUrl"]);
-    });
 
 var app = builder.Build();
 

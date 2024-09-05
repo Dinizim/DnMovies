@@ -10,14 +10,12 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IMovieRepository _movieRepository;
-    private readonly IMovieImgRepository _movieImgRepository;
     private readonly IConfiguration _configuration;
 
-    public HomeController(ILogger<HomeController> logger, IMovieRepository movieRepository, IMovieImgRepository movieImgRepository, IConfiguration configuration)
+    public HomeController(ILogger<HomeController> logger, IMovieRepository movieRepository, IConfiguration configuration)
     {
         _logger = logger;
         _movieRepository = movieRepository;
-        _movieImgRepository = movieImgRepository;
         _configuration = configuration;
     }
 
