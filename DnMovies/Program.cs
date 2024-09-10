@@ -13,7 +13,7 @@ builder.Services.AddRefitClient<IMovieRepository>()
         c.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokenApi}");
         c.DefaultRequestHeaders.Add("Accept", "application/json");
     });
-
+    
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

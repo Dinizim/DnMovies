@@ -1,46 +1,48 @@
-﻿@model MovieResponse
+﻿@model MoviesViewModel
 
 <div class="container mt-5">
-    <h1 class="text-center text-primary mb-4">Filmes - Populares</h1>
+    <h1 class="text-center text-light mb-4">Filmes - Populares</h1>
 
-    <!-- Carousel -->
-    <div id="movieCarousel" class="carousel slide bg-dark custom-shadow rounded" style="height: 400px;" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            @{
-                var isFirst = true;
-            }
-            @foreach (var movie in Model.Results)
-            {
-                <div class="carousel-item @(isFirst ? "active" : "")">
-                    <div class="d-flex justify-content-center align-items-center" style="height: 100%;">
-                        <div class="card custom-card border-0 shadow-lg"  style= "margin-top: 20px;">
-                            <img class="card-img-top rounded" style="height: 350px; object-fit: cover;" src="@movie.Poster_path" alt="@movie.Title">
+    @if (String.IsNullOrEmpty(ViewBag.CurrentFilter))
+    {
+        <!-- Carousel -->
+        <div id="movieCarousel" class="carousel slide bg-dark custom-shadow rounded" style="height: 400px;" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @{
+                    var isFirst = true;
+                }
+                @foreach (var movie in Model.PopularMovies.Results)
+                {
+                    <div class="carousel-item @(isFirst ? "active" : "")">
+                        <div class="d-flex justify-content-center align-items-center" style="height: 100%;">
+                            <div class="card custom-card border-0 shadow-lg"  style= "margin-top: 20px;">
+                                <img class="card-img-top rounded" style="height: 500px; object-fit: cover;" src="@movie.Poster_path" alt="@movie.Title">
+                            </div>
                         </div>
                     </div>
-                </div>
-                isFirst = false;
-            }
+                    isFirst = false;
+                }
+            </div>
+
+            <a class="carousel-control-prev" href="#movieCarousel" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </a>
+            <a class="carousel-control-next" href="#movieCarousel" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Próximo</span>
+            </a>
         </div>
-
-        <a class="carousel-control-prev" href="#movieCarousel" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Anterior</span>
-        </a>
-        <a class="carousel-control-next" href="#movieCarousel" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Próximo</span>
-        </a>
-    </div>
-
+    }
 
     <!-- Lista de Filmes -->
-    <h2 class="text-center text-success mt-5 mb-4">Outros Filmes Populares</h2>
+    <h2 class="text-center text-light mt-5 mb-4">Outros Filmes Bem Avaliados </h2>
     <div class="movie-list row g-3">
-        @foreach (var movie in Model.Results)
+        @foreach (var movie in Model.TopRatedMovies.Results)
         {
             <div class="col-6 col-md-3">
                 <div class="card custom-card border-0 shadow-sm">
-                    <img class="card-img-top rounded" style="height: 300px; object-fit: cover;" src="@movie.Poster_path" alt="@movie.Title">
+                    <img class="card-img-top rounded" style="height: 500px; object-fit: cover;" src="@movie.Poster_path" alt="@movie.Title">
                 </div>
             </div>
         }

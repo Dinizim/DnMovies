@@ -19,17 +19,38 @@ public class HomeController : Controller
         _configuration = configuration;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string searchString)
     {
-        var movieResponse = await _movieRepository.GetMoviesAsync("pt-BR", 1);
+        var topRatedMovies = await _movieRepository.GetTopRatedMoviesAsync("pt-BR", 1);
+        var popularMovies = await _movieRepository.GetPopularMoviesAsync("pt-BR", 1);
         var BaseImgURl = _configuration["TMDB:BaseImageUrl"];
-        foreach (var movie in movieResponse.Results)
+
+        if (!String.IsNullOrEmpty(searchString))
+        {
+            topRatedMovies = await _movieRepository.MovieSearch(searchString, false, "pt-BR", 1);
+        }
+        
+        foreach (var movie in topRatedMovies.Results)
+        {
+            movie.Backdrop_path = $"{BaseImgURl}{movie.Backdrop_path}";
+            movie.Poster_path = $"{BaseImgURl}{movie.Poster_path}";
+        }
+        foreach (var movie in popularMovies.Results)
         {
             movie.Backdrop_path = $"{BaseImgURl}{movie.Backdrop_path}";
             movie.Poster_path = $"{BaseImgURl}{movie.Poster_path}";
         }
 
-        _logger.LogInformation("Resposta recebida da API: {Response}", JsonConvert.SerializeObject(movieResponse));
-        return View(movieResponse);
+        var viewModel = new MoviesViewModel
+        {
+            TopRatedMovies = topRatedMovies,
+            PopularMovies = popularMovies
+        };
+
+        ViewBag.CurrentFilter = searchString;
+
+        _logger.LogInformation("Resposta recebida da API: {Response}", JsonConvert.SerializeObject(viewModel));
+
+        return View(viewModel);
     }
 }
