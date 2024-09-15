@@ -1,6 +1,7 @@
 using DnMovies.Models;
 using DnMovies.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using System.Diagnostics;
 
@@ -19,9 +20,9 @@ public class HomeController : Controller
         _configuration = configuration;
     }
 
-    public async Task<IActionResult> Index(string searchString)
+    public async Task<IActionResult> Index(string searchString, int page = 1)
     {
-        var topRatedMovies = await _movieRepository.GetTopRatedMoviesAsync("pt-BR", 1);
+        var topRatedMovies = await _movieRepository.GetTopRatedMoviesAsync("pt-BR", page);
         var popularMovies = await _movieRepository.GetPopularMoviesAsync("pt-BR", 1);
         var BaseImgURl = _configuration["TMDB:BaseImageUrl"];
 
@@ -44,7 +45,9 @@ public class HomeController : Controller
         var viewModel = new MoviesViewModel
         {
             TopRatedMovies = topRatedMovies,
-            PopularMovies = popularMovies
+            PopularMovies = popularMovies,
+            Page = page,
+            TotalPages = topRatedMovies.TotalPages,
         };
 
         ViewBag.CurrentFilter = searchString;
@@ -52,5 +55,16 @@ public class HomeController : Controller
         _logger.LogInformation("Resposta recebida da API: {Response}", JsonConvert.SerializeObject(viewModel));
 
         return View(viewModel);
+    }
+
+    public async Task<IActionResult> MovieOverview(int id)
+    {
+        var BaseImgURl = _configuration["TMDB:BaseImageUrlOriginal"];
+        var movie = await _movieRepository.GetMovieByID(id, "pt-BR");
+
+        movie.Backdrop_path = $"{BaseImgURl}{movie.Backdrop_path}";
+        movie.Poster_path = $"{BaseImgURl}{movie.Poster_path}";
+
+        return View(movie);
     }
 }

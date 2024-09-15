@@ -1,0 +1,42 @@
+﻿@model DnMovies.Models.Result
+
+<div class="movie-container text-light custom-shadow rounded position-relative" style="background-image: url('@Model.Backdrop_path'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <div class="overlay" style="background: rgba(0, 0, 0, 0.3);"></div>
+
+    <div class="container py-4" style="background-color: rgba(255, 255, 255, 0.2);">
+        <div class="row">
+            <!-- Poster -->
+            <div class="col-md-4 d-flex justify-content-center">
+                <img src="@Model.Poster_path" alt="Poster" class="img-fluid rounded shadow-lg">
+            </div>
+
+            <!-- Movie Info -->
+            <div class="col-md-8">
+                <h1 class="display-4 mb-3">@Model.Original_title (@Model.Release_date?.Substring(0, 4))</h1>
+                <p class="lead fst-italic" style="color: #f0f0f0;">@Model.Tagline</p>
+
+                <div class="mb-3">
+                    @foreach (var genre in Model.Genres)
+                    {
+                        <span class="badge bg-secondary me-2">@genre.Name</span>
+                    }
+                </div>
+                <p class="mb-4">@Model.Overview</p>
+
+                <!-- Rating -->
+                <div class="d-flex align-items-center mb-4">
+                    <div class="rating-circle bg-success text-white d-flex justify-content-center align-items-center me-3 shadow">
+                        <span>@(Math.Round(Model.Vote_average * 10, 0))</span>
+                    </div>
+                    <p class="mb-0" style="color: #f0f0f0;">@Model.Vote_count usuários</p>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex gap-2">
+                    <button class="btn btn-light text-dark">Assistir agora</button>
+                    <button class="btn btn-outline-light">Adicionar à lista</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

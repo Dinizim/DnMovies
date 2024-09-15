@@ -10,7 +10,11 @@ html {
     }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
@@ -31,11 +35,10 @@ body {
     }
 
 .custom-shadow {
-    -webkit-box-shadow: inset 10px 10px 161px -37px rgba(0,0,0,0.72);
-    -moz-box-shadow: inset 10px 10px 161px -37px rgba(0,0,0,0.72);
-    box-shadow: inset 10px 10px 161px -37px rgba(0,0,0,0.72);
+    -webkit-box-shadow: inset 10px 10px 250px -37px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: inset 10px 10px 250px -37px rgba(0, 0, 0, 0.75);
+    box-shadow: inset 10px 10px 250px -37px rgba(0, 0, 0, 0.75);
 }
-
 
 .custom-card img {
     max-height: 350px;
@@ -46,7 +49,6 @@ body {
     .custom-card img:hover {
         transform: scale(1.05);
     }
-}
 
 .carousel-inner {
     height: 100%;
@@ -58,6 +60,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     gap: 1.5rem;
+    margin-bottom: 40px;
 }
 
     .movie-list img {
@@ -67,7 +70,8 @@ body {
 
         .movie-list img:hover {
             transform: scale(1.05);
-       }
+        }
+
 .navbar {
     background-color: #1c1c1c;
 }
@@ -84,4 +88,155 @@ body {
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     filter: invert(1);
+}
+
+.movie-container {
+    position: relative;
+    padding: 20px;
+    background-color: #1f1f1f;
+    color: #fff;
+    border-radius: 15px;
+    width: 95%;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6); /* Sombra escura */
+}
+
+    /* Sobreposição escura para o fundo */
+    .movie-container .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.75); /* Fundo preto com 50% de opacidade */
+        z-index: 1;
+    }
+
+/* Certifique-se de que o conteúdo fique acima da overlay */
+.movie-info {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+}
+
+/* Poster ajustado */
+.poster img {
+    max-width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra no poster */
+}
+
+.movie-info h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: #fff;
+}
+
+.movie-info p {
+    color: #fff;
+}
+
+.tagline {
+    font-style: italic;
+    color: #aaa;
+}
+
+/* Estilo para os gêneros */
+.genres span {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.overview {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 10px 0;
+}
+
+/* Estilo para o círculo de rating */
+.rating {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    position: relative;
+}
+
+.rating-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #28a745;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra no círculo */
+    margin-right: 10px;
+    position: relative;
+}
+
+    .rating-circle span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+.rating p {
+    font-size: 1rem;
+    color: #ccc;
+    margin-left: 10px;
+}
+
+/* Estilo para os botões */
+.buttons {
+    margin-top: 20px;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+/* Estilo da paginação */
+.pagination .page-link {
+    color: #fff;
+    background-color: #343a40;
+    border-color: #6c757d;
+}
+
+    .pagination .page-link:hover {
+        background-color: #495057;
+    }
+
+.pagination .page-item.active .page-link {
+    background-color: #f8f9fa;
+    color: #000;
+    border-color: #6c757d;
+}
+
+.pagination {
+    margin-top: 20px;
+}
+
+/* Ajusta o espaçamento geral */
+.container {
+    padding-bottom: 40px;
 }

@@ -16,7 +16,9 @@
                     <div class="carousel-item @(isFirst ? "active" : "")">
                         <div class="d-flex justify-content-center align-items-center" style="height: 100%;">
                             <div class="card custom-card border-0 shadow-lg"  style= "margin-top: 20px;">
-                                <img class="card-img-top rounded" style="height: 500px; object-fit: cover;" src="@movie.Poster_path" alt="@movie.Title">
+                                <a style=" text-decoration:none;" asp-action="MovieOverview" asp-route-id="@movie.Id">
+                                    <img class="card-img-top rounded" style="height: 500px; object-fit: cover;" src="@movie.Poster_path" alt="@movie.Title">
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -42,9 +44,34 @@
         {
             <div class="col-6 col-md-3">
                 <div class="card custom-card border-0 shadow-sm">
-                    <img class="card-img-top rounded" style="height: 500px; object-fit: cover;" src="@movie.Poster_path" alt="@movie.Title">
+                    <a style=" text-decoration:none;" asp-action="MovieOverview" asp-route-id="@movie.Id">
+                        <img class="card-img-top rounded" style="height: 500px; object-fit: cover;" src="@movie.Poster_path" alt="@movie.Title">
+                     </a>
+                
+
                 </div>
             </div>
         }
     </div>
+    <!-- Paginação -->
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            <!-- Botão Anterior -->
+            <li class="page-item @(Model.Page == 1 ? "disabled" : "")">
+                <a class="page-link text-light bg-dark border-light" href="?page=@(Model.Page - 1)&searchString=@ViewBag.CurrentFilter">Anterior</a>
+            </li>
+
+            @for (var i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.Page ? "active" : "")">
+                    <a class="page-link @(i == Model.Page ? "text-dark bg-light" : "text-light bg-dark border-light")" href="?page=@i&searchString=@ViewBag.CurrentFilter">@i</a>
+                </li>
+            }
+
+            <!-- Botão Próximo -->
+            <li class="page-item @(Model.Page == Model.TotalPages ? "disabled" : "")">
+                <a class="page-link text-light bg-dark border-light" href="?page=@(Model.Page + 1)&searchString=@ViewBag.CurrentFilter">Próximo</a>
+            </li>
+        </ul>
+    </nav>
 </div>
