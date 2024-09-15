@@ -30,7 +30,7 @@ DnMovies é uma aplicação web criada  para explorar e visualizar informações
 - **Detalhes do Filme**: Veja informações detalhadas sobre um filme, incluindo sinopse, gêneros, e avaliação.
 - **Adicionar à Lista**: Adicione filmes à sua lista de favoritos.
 
-![Gif de Demonstração](https://via.placeholder.com/800x400)
+https://github.com/user-attachments/assets/e2b943a9-963b-441d-9361-f5242eb1ac47
 
 ## Como Executar
 
